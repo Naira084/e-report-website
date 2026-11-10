@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTRL+R</title>
+    <link rel="shortcut icon" href="assets/favco.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.min.css">
+</head>
+
+<body class="all">
+    <header>
+        <div class="brand">
+            <i class="ri-flashlight-fill"></i>
+            <div class="brand-title">CTRL+R</div>
+        </div>
+        <nav class="nav-container">
+            <button type="button" class="nav-item active" onclick="switchPage('home')">INPUT</button>
+            <button type="button" class="nav-item nav-item-stats" onclick="switchPage('stats')">
+                STATS <span class="nav-badge" id="nav-badge-count">2</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- HALAMAN INPUT -->
+    <div id="page-home" class="page-section">
+        <main class="main-container home-container">
+            <div class="hero-content">
+                <h1 class="hero-title-main">Voice</h1>
+                <h2 class="hero-title-sub">Out<span class="accent">.</span></h2>
+                <p class="hero-description">
+                    Laporkan kendala sarana & prasarana sekolah secara langsung untuk penanganan cepat oleh tim sarpras.
+                </p>
+            </div>
+
+            <div class="form-card">
+                <form id="facility-report-form" class="report-form" autocomplete="off" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="nama" class="form-label">Nama Pelapor <span class="accent">*</span></label>
+                        <input type="text" id="nama" name="reporter" class="form-input" placeholder="Isi nama lengkap anda"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kategori" class="form-label">Pilih Kategori <span class="accent">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="kategori" name="kategori" class="form-select" required>
+                                <option value="" disabled selected hidden>Pilih kategori kerusakan</option>
+                                <option value="Fasilitas Umum">Fasilitas Umum</option>
+                                <option value="Peralatan & Gedung">Peralatan & Gedung</option>
+                                <option value="Kebersihan">Kebersihan</option>
+                                <option value="Sanitasi">Sanitasi</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                            <div class="dropdown-arrow"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deskripsi" class="form-label">Deskripsi <span class="accent">*</span></label>
+                        <textarea id="deskripsi" name="deskripsi" class="form-textarea"
+                            placeholder="Jelaskan detail kerusakan fasilitas dan lokasinya" maxlength="200" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        KIRIM LAPORAN
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- HALAMAN STATS -->
+    <div id="page-stats" class="page-section hidden">
+        <main class="main-container stats-container">
+            <div class="stats-banner">
+                <h1 class="stats-title">STATS</h1>
+                <div class="stats-card">
+                    <span class="stats-number" id="count-total">3</span>
+                    <span class="stats-label">TOTAL LAPORAN</span>
+                </div>
+                <div class="stats-card">
+                    <span class="stats-number" id="count-menunggu">2</span>
+                    <span class="stats-label">MENUNGGU PROSES</span>
+                </div>
+            </div>
+
+            <div class="filter-container">
+                <button type="button" class="filter-btn active" onclick="filterStatus('SEMUA', this)">SEMUA (3)</button>
+                <button type="button" class="filter-btn" onclick="filterStatus('MENUNGGU PROSES', this)">MENUNGGU
+                    (2)</button>
+                <button type="button" class="filter-btn" onclick="filterStatus('SELESAI', this)">SELESAI (1)</button>
+            </div>
+
+            <div class="table-card">
+                <table class="report-table">
+                    <thead>
+                        <tr class="table-header">
+                            <th>PELAPOR</th>
+                            <th>KATEGORI</th>
+                            <th>DESKRIPSI</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="report-table-body">
+
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
